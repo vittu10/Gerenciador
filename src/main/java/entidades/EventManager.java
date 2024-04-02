@@ -7,43 +7,42 @@ import java.util.List;
  * Esta classe é responsável por gerenciar os eventos.
  */
 public class EventManager {
-	
-	    private List<Event> events;
+
 	    /**
-	     * Construtor padrão que inicializa a lista de eventos.
+	     * Lista de eventos gerenciados.
+	     */
+	    private List<Event> events;
+
+	    /**
+	     * Construtor da classe EventManager.
+	     * Inicializa a lista de eventos como uma nova ArrayList.
 	     */
 	    public EventManager() {
 	        this.events = new ArrayList<>();
 	    }
+
 	    /**
-	     * Adiciona um evento à lista de eventos.
-	     * 
+	     * Adiciona um evento à lista de eventos e ordena a lista por data.
 	     * @param event O evento a ser adicionado.
 	     */
-
 	    public void addEvent(Event event) {
 	        events.add(event);
 	        events.sort(Comparator.comparing(Event::getDate));
-
 	    }
-	    /**
-	     * Retorna todos os eventos cadastrados.
-	     * 
-	     * @return Uma lista contendo todos os eventos cadastrados.
-	     */
 
+	    /**
+	     * Obtém todos os eventos gerenciados.
+	     * @return Uma lista contendo todos os eventos.
+	     */
 	    public List<Event> getEvents() {
 	        return events;
 	    }
+
 	    /**
-	     * Retorna uma lista de eventos de uma categoria específica.
-	     * 
-	     * 
-	     * 
-	     * @param category A categoria dos eventos desejados.
+	     * Obtém uma lista de eventos filtrados por categoria.
+	     * @param category A categoria pela qual filtrar os eventos.
 	     * @return Uma lista contendo os eventos da categoria especificada.
 	     */
-
 	    public List<Event> getEventsByCategory(String category) {
 	        List<Event> filteredEvents = new ArrayList<>();
 	        for (Event event : events) {
@@ -54,4 +53,5 @@ public class EventManager {
 	        return filteredEvents;
 	    }
 	}
+
 

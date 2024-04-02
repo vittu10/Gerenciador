@@ -1,8 +1,7 @@
 package Programa;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-import java.util.Scanner;
+import java.util.List;
 
 import entidades.Event;
 import entidades.EventManager;
@@ -10,40 +9,42 @@ import entidades.EventManager;
 public class Main {
 
 	public static void main(String[] args) {
-		EventManager eventManager = new EventManager();
+	    EventManager eventManager = new EventManager();
 
-		Scanner scanner = new Scanner(System.in);
-		
+        // Adicione alguns eventos
+	    eventManager.addEvent(new Event("Conferência de Negócios", "Conferência", LocalDate.of(2024, 9, 5), "Salvador"));
+	    eventManager.addEvent(new Event("Conferência de Ciência", "Conferência", LocalDate.of(2024, 11, 13), "Salvador"));
+	    eventManager.addEvent(new Event("Conferência de Educação", "Conferência", LocalDate.of(2024, 12, 9), "Salvador"));
+	    eventManager.addEvent(new Event("Conferência de TI", "Conferência", LocalDate.of(2024, 10, 20), "Salvador"));
+	    eventManager.addEvent(new Event("Workshop de Desenvolvimento Web", "Workshop", LocalDate.of(2024, 11, 15), "Salvador"));
+	    eventManager.addEvent(new Event("Seminário de Marketing Digital", "Seminário", LocalDate.of(2024, 12, 5), "Salvador"));
+	    eventManager.addEvent(new Event("Seminário de Inovação Tecnológica", "Seminário", LocalDate.of(2024, 2, 13), "Salvador"));
+	    eventManager.addEvent(new Event("Seminário de Empreendedorismo", "Seminário", LocalDate.of(2024, 5, 15), "Salvador"));
+	    eventManager.addEvent(new Event("Seminário de Inteligência Artificial", "Seminário", LocalDate.of(2024, 12, 9), "Salvador"));
+	    eventManager.addEvent(new Event("Seminário de Tecnologia da Informação", "Seminário", LocalDate.of(2024, 12, 10), "Salvador"));
+	    eventManager.addEvent(new Event("Seminário de Gestão de Projetos", "Seminário", LocalDate.of(2024, 12, 10), "Salvador"));
+	    eventManager.addEvent(new Event("Seminário de Desenvolvimento de Software", "Seminário", LocalDate.of(2024, 12, 10), "Salvador"));
+	    eventManager.addEvent(new Event("Seminário de Big Data", "Seminário", LocalDate.of(2024, 12, 10), "Salvador"));
+	    eventManager.addEvent(new Event("Seminário de Segurança da Informação", "Seminário", LocalDate.of(2024, 12, 10), "Salvador"));
+	    eventManager.addEvent(new Event("Workshop de Design Thinking", "Workshop", LocalDate.of(2024, 8, 15), "Salvador"));
+	    eventManager.addEvent(new Event("Workshop de Desenvolvimento de Jogos", "Workshop", LocalDate.of(2024, 9, 5), "Salvador"));
+	    eventManager.addEvent(new Event("Workshop de Fotografia", "Workshop", LocalDate.of(2024, 10, 13), "Salvador"));
+	    eventManager.addEvent(new Event("Workshop de Liderança", "Workshop", LocalDate.of(2024, 11, 9), "Salvador"));
+        
 
-		while (true) {
-			System.out.println("Digite o nome do evento (ou 'sair' para sair):");
-			String name = scanner.nextLine();
-			if (name.equalsIgnoreCase("sair")) {
-				break;
-			}
+        // Liste todos os eventos
+        List<Event> allEvents = eventManager.getEvents();
+        for (Event event : allEvents) {
+            System.out.println("Evento: " + event.getName() + ", Data: " + event.getDate() + ", Local: " + event.getLocation());
+        }
 
-			System.out.println("Digite a categoria do evento:");
-			String category = scanner.nextLine();
-
-			System.out.println("Digite a data do evento (formato YYYY-MM-DD):");
-			LocalDate date = LocalDate.parse(scanner.nextLine());
-
-			System.out.println("Digite o local do evento:");
-			String location = scanner.nextLine();
-
-			Event event = new Event(name, category, date, location);
-			eventManager.addEvent(event);
-
-			System.out.println("Evento adicionado com sucesso!");
-		}
-
-		System.out.println("\nEventos marcados e em ordem de data:");
-		for (Event event : eventManager.getEvents()) {
-			System.out.println(
-					"Evento: " + event.getName() + ", Data: " + event.getDate() + ", Local: " + event.getLocation());
-		}
-
-		scanner.close();
-	}
+        // Liste os eventos de uma categoria específica
+        List<Event> categoryEvents = eventManager.getEventsByCategory("Seminário");
+        System.out.println("\nEventos de Workshop:");
+        for (Event event : categoryEvents) {
+            System.out.println("Evento: " + event.getName() + ", Data: " + event.getDate() + ", Local: " + event.getLocation());
+        }
+     
+    }
 
 }
